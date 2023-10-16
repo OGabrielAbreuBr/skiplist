@@ -1,35 +1,43 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "skiplist.h"
-int main() {
-    srand(time(NULL));
-    SkipList* list = createSkipList();
+#include "item.h"
+#include <string.h>
 
-    insert(list, 3);
-    insert(list, 1);
-    insert(list, 5);
-    insert(list, 2);
-    insert(list, 4);
+int main(void)
+{
+    LISTA *l = lista_criar();
+    char *s;
+    while ((scanf("%s", s)) != EOF){
+        char palavra[50];
+        char definicao[140];
 
-    printSkipList(list);
-
-    int key = 2;
-    if (search(list, key)) {
-        printf("%d found in the Skip List.\n", key);
-    } else {
-        printf("%d not found in the Skip List.\n", key);
+        if (strcmp(s, "insercao")){
+            scanf("%s", palavra);
+            scanf("%s", definicao); // alterar
+            ITEM *item = item_criar(palavra, definicao);
+            lista_inserir(l, item);
+        } else if(strcmp(s, "remocao")){
+            scanf("%s", palavra);
+            lista_remover(l, palavra);
+        } else if(strcmp(s, "busca")){
+            scanf("%s", palavra);
+            NO *p = lista_busca(l, palavra);
+            if(p != NULL)
+                printf("%s %s", item_get_palavra(p), item_get_definicao(p)); //alterar
+            else
+                printf("OPERACAO INVALIDA");
+        } else if(strcmp(s, "alteracao")){
+            scanf("%s", palavra);
+            char nova_definicao[140];
+            scanf("%s", nova_definicao);
+            lista_alterar(l, palavra, nova_definicao);
+        } else if(strcmp(s, "impressao")){
+            char caracter;
+            scanf(" %c", &caracter);
+            lista_imprimir(l, caracter);
+        }
     }
 
-    int removed = 3;
-    if (removeElement(list, removed)) {
-        printf("%d removed from the Skip List.\n", removed);
-    } else {
-        printf("%d not found in the Skip List.\n", removed);
-    }
-
-    printSkipList(list);
-
-    freeSkipList(list);
+    lista_apagar(&l);
     return 0;
 }

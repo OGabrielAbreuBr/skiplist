@@ -7,11 +7,13 @@
 #define ORDENADA 0
 
 typedef struct lista_ LISTA;
+typedef struct no_ NO;
 
-LISTA* createSkipList();
-void freeSkipList(LISTA* list);
-bool search(LISTA* list, int value);
-void insert(LISTA* list, int value);
-bool removeElement(LISTA* list, int value);
-void printSkipList(LISTA* list);
+LISTA* lista_criar();
+void lista_apagar(LISTA** lista) ;
+NO* lista_buscar(LISTA* lista, char *chave);
+void lista_alterar(LISTA *lista, char *chave, char *nova_definicao);
+void lista_inserir(LISTA* lista, ITEM *item);
+int lista_remover(LISTA* lista, char *chave);
+void lista_imprimir(LISTA* lista, char c);
 #endif

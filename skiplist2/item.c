@@ -3,17 +3,19 @@
 #include "item.h"
 #include <stdbool.h>
 
-struct item_{ 
-        int chave;
+struct item_ {
+    char *palavra;  // Substitua MAX_TAMANHO pelo tamanho máximo necessário
+    char *definicao;
 };
 
-ITEM *item_criar (int chave){
+ITEM *item_criar (char *palavra, char *definicao){
           ITEM *item;
           
           item = (ITEM *) malloc(sizeof(ITEM));
           
           if (item != NULL){
-             item->chave = chave;
+             item->palavra = palavra;
+             item->definicao = definicao;
              return(item);
           }
           return(NULL);
@@ -28,22 +30,31 @@ bool item_apagar(ITEM **item){
    return(false);
 }
 
-int item_get_chave(ITEM *item){
+char* item_get_palavra(ITEM *item){
     if (item != NULL)
-      return(item->chave);
+      return(item->palavra);
+    exit(1);
+}
+
+char* item_get_definicao(ITEM *item){
+    if (item != NULL)
+      return(item->definicao);
     exit(1);
 }
 
 
-bool item_set_chave(ITEM *item, int chave){
+bool item_set_palavra(ITEM *item, char *palavra){
   if (item != NULL){
-    item->chave = chave;
+    item->palavra = palavra;
     return (true);
   }
   return (false);
 }
 
-void item_imprimir(ITEM *item){
-     if (item != NULL)
-        printf("%d", item->chave);
+bool item_set_definicao(ITEM *item, char *definicao){
+  if (item != NULL){
+    item->definicao = definicao;
+    return (true);
+  }
+  return (false);
 }
