@@ -7,6 +7,7 @@
 
     LISTA* lista_criar(); //feito
     int lista_vazia(LISTA* lista); // feito
+    int lista_cheia(LISTA *lista);
 
     ITEM* lista_buscar(LISTA* lista, char *chave); // feito
     int lista_alterar(LISTA *lista, char *chave, char *nova_definicao); // feito
